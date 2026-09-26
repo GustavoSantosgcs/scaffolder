@@ -64,13 +64,29 @@ model Task {
   priority    TaskPriority @default(MEDIUM)
   dueDate     DateTime?
   ownerId     String       @db.Uuid
+  categoryId  String?      @db.Uuid
   deletedAt   DateTime?
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
   owner       UserProfile  @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  category    Category?    @relation(fields:[categoryId], references: [id], onDelete:SetNull)
 
   @@index([ownerId])
+  @@index([categoryId])
   @@index([deletedAt])
   @@index([status])
   @@map("tasks")
+}
+
+model Category {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title       String
+  description String?
+  deletedAt   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  tasks       Task[]
+
+  @@index([deletedAt])
+  @@map("categories")
 }
