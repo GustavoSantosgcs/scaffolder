@@ -92,7 +92,7 @@ export class UpdateTaskDto {
   @IsDateString({}, { message: 'Data de entrega limite deve ser uma string ISO válida.' })
   dueDate?: string;
 
-  @ApiPropertyOptional({ description: 'ID da categoria (envie null para remover a categoria)', nullable: true })
+  @ApiPropertyOptional({ description: 'ID da categoria (envie null para remover a categoria)', type: String, nullable: true })
   @IsOptional()
   @IsUUID('all', { message: 'Categoria inválida.' })
   categoryId?: string | null;
@@ -134,7 +134,7 @@ export class TaskDto {
   @ApiPropertyOptional({ description: 'Dados resumidos do proprietário', type: () => TaskOwnerDto })
   owner?: TaskOwnerDto;
 
-  @ApiPropertyOptional({ description: 'Identificador da categoria', nullable: true })
+  @ApiPropertyOptional({ description: 'Identificador da categoria', type: String, nullable: true })
   categoryId!: string | null;
 
   @ApiPropertyOptional({ description: 'Dados resumidos da categoria', type: () => TaskCategoryDto, nullable: true })

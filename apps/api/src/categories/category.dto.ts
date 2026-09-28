@@ -41,7 +41,7 @@ export class CategoryDto {
   @ApiProperty({ description: 'Título da categoria', example: 'Estudos' })
   title!: string;
 
-  @ApiPropertyOptional({ description: 'Descrição da categoria', nullable: true })
+  @ApiPropertyOptional({ description: 'Descrição da categoria', type: String, nullable: true })
   description!: string | null;
 
   @ApiProperty({ description: 'Data de criação' })

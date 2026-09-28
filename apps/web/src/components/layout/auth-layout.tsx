@@ -10,6 +10,7 @@ import {
   Menu,
   Search,
   Shield,
+  Tag,
   User,
   Users,
   X,
@@ -91,6 +92,12 @@ export function AuthLayout() {
                 icon: <Users className="h-4 w-4 shrink-0" />,
                 badge: 'Admin',
               },
+              {
+                label: 'Categorias',
+                path: '/categories',
+                icon: <Tag className="h-4 w-4 shrink-0" />,
+                badge: 'Admin',
+              },
             ]
           : []),
       ],
@@ -115,6 +122,8 @@ export function AuthLayout() {
         return { title: 'Tarefas', category: 'Módulos' };
       case '/users':
         return { title: 'Usuários', category: 'Administração' };
+      case '/categories':
+        return { title: 'Categorias', category: 'Administração' };        
       case '/profile':
         return { title: 'Meu Perfil', category: 'Conta' };
       case '/':

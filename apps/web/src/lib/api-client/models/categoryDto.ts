@@ -5,7 +5,6 @@
  * API REST do AppStart - Especificação OpenAPI 3.0
  * OpenAPI spec version: 1.0.0
  */
-import type { CategoryDtoDescription } from './categoryDtoDescription';
 
 export interface CategoryDto {
   /** Identificador único da categoria */
@@ -16,7 +15,7 @@ export interface CategoryDto {
      * Descrição da categoria
      * @nullable
      */
-  description?: CategoryDtoDescription;
+  description?: string | null;
   /** Data de criação */
   createdAt: string;
   /** Data de última atualização */

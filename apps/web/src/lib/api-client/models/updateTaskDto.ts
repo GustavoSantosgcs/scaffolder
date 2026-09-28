@@ -5,7 +5,6 @@
  * API REST do AppStart - Especificação OpenAPI 3.0
  * OpenAPI spec version: 1.0.0
  */
-import type { UpdateTaskDtoCategoryId } from './updateTaskDtoCategoryId';
 import type { UpdateTaskDtoPriority } from './updateTaskDtoPriority';
 import type { UpdateTaskDtoStatus } from './updateTaskDtoStatus';
 
@@ -31,5 +30,5 @@ export interface UpdateTaskDto {
      * ID da categoria (envie null para remover a categoria)
      * @nullable
      */
-  categoryId?: UpdateTaskDtoCategoryId;
+  categoryId?: string | null;
 }

@@ -1966,7 +1966,7 @@
             ]
           },
           "categoryId": {
-            "type": "object",
+            "type": "string",
             "description": "Identificador da categoria",
             "nullable": true
           },
@@ -2063,7 +2063,7 @@
             "description": "Data de entrega limite (ISO 8601)"
           },
           "categoryId": {
-            "type": "object",
+            "type": "string",
             "description": "ID da categoria (envie null para remover a categoria)",
             "nullable": true
           }
@@ -2083,7 +2083,7 @@
             "example": "Estudos"
           },
           "description": {
-            "type": "object",
+            "type": "string",
             "description": "Descrição da categoria",
             "nullable": true
           },

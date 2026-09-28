@@ -9,6 +9,7 @@ import { ThemeProvider } from './context/theme-context';
 import { AuthLayout } from './components/layout/auth-layout';
 import { ProtectedRoute } from './components/layout/protected-route';
 import { DashboardPage } from './pages/dashboard-page';
+import { CategoriesPage } from './pages/categories-page';
 import { LoginPage } from './pages/login-page';
 import { ProfilePage } from './pages/profile-page';
 import { TasksPage } from './pages/tasks-page';
@@ -63,6 +64,14 @@ export function App() {
                   element={
                     <ProtectedRoute requiredRole="ADMIN">
                       <UsersPage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/categories"
+                  element={
+                    <ProtectedRoute requiredRole="ADMIN">
+                      <CategoriesPage />
                     </ProtectedRoute>
                   }
                 />
