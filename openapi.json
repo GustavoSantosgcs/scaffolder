@@ -904,6 +904,15 @@
             }
           },
           {
+            "name": "categoryId",
+            "required": false,
+            "in": "query",
+            "description": "Filtro por categoria (ID)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "sortBy",
             "required": false,
             "in": "query",
@@ -1175,6 +1184,330 @@
         "summary": "Excluir tarefa (remoção lógica)",
         "tags": [
           "tasks"
+        ]
+      }
+    },
+    "/api/v1/categories": {
+      "get": {
+        "description": "Disponível para qualquer usuário autenticado.",
+        "operationId": "CategoriesController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Lista de categorias",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoryDto"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailsDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "appstart_session": []
+          }
+        ],
+        "summary": "Listar categorias ativas",
+        "tags": [
+          "categories"
+        ]
+      },
+      "post": {
+        "operationId": "CategoriesController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCategoryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Categoria criada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailsDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailsDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Apenas ADMIN",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailsDto"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Título já existe",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailsDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "appstart_session": []
+          }
+        ],
+        "summary": "Criar categoria (ADMIN)",
+        "tags": [
+          "categories"
+        ]
+      }
+    },
+    "/api/v1/categories/{id}": {
+      "get": {
+        "operationId": "CategoriesController_findById",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dados da categoria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailsDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Categoria não encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailsDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "appstart_session": []
+          }
+        ],
+        "summary": "Obter uma categoria",
+        "tags": [
+          "categories"
+        ]
+      },
+      "put": {
+        "operationId": "CategoriesController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCategoryDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Categoria atualizada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailsDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Não autenticado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailsDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Apenas ADMIN",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailsDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Categoria não encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailsDto"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Título já existe",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailsDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "appstart_session": []
+          }
+        ],
+        "summary": "Atualizar categoria (ADMIN)",
+        "tags": [
+          "categories"
+        ]
+      },
+      "delete": {
+        "description": "Remoção lógica. As tarefas da categoria ficam sem categoria.",
+        "operationId": "CategoriesController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Categoria excluída"
+          },
+          "401": {
+            "description": "Não autenticado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailsDto"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Apenas ADMIN",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailsDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Categoria não encontrada",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetailsDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "appstart_session": []
+          }
+        ],
+        "summary": "Excluir categoria (ADMIN)",
+        "tags": [
+          "categories"
         ]
       }
     }
@@ -1519,6 +1852,11 @@
             "type": "string",
             "description": "Data de entrega limite (ISO 8601)",
             "example": "2026-12-31T23:59:59.000Z"
+          },
+          "categoryId": {
+            "type": "string",
+            "description": "ID da categoria da tarefa",
+            "example": "c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a33"
           }
         },
         "required": [
@@ -1548,6 +1886,25 @@
           "id",
           "name",
           "email"
+        ]
+      },
+      "TaskCategoryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identificador da categoria",
+            "example": "c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a33"
+          },
+          "title": {
+            "type": "string",
+            "description": "Título da categoria",
+            "example": "Estudos"
+          }
+        },
+        "required": [
+          "id",
+          "title"
         ]
       },
       "TaskDto": {
@@ -1605,6 +1962,21 @@
             "allOf": [
               {
                 "$ref": "#/components/schemas/TaskOwnerDto"
+              }
+            ]
+          },
+          "categoryId": {
+            "type": "object",
+            "description": "Identificador da categoria",
+            "nullable": true
+          },
+          "category": {
+            "description": "Dados resumidos da categoria",
+            "nullable": true,
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TaskCategoryDto"
               }
             ]
           },
@@ -1689,6 +2061,83 @@
           "dueDate": {
             "type": "string",
             "description": "Data de entrega limite (ISO 8601)"
+          },
+          "categoryId": {
+            "type": "object",
+            "description": "ID da categoria (envie null para remover a categoria)",
+            "nullable": true
+          }
+        }
+      },
+      "CategoryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identificador único da categoria",
+            "example": "c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a33"
+          },
+          "title": {
+            "type": "string",
+            "description": "Título da categoria",
+            "example": "Estudos"
+          },
+          "description": {
+            "type": "object",
+            "description": "Descrição da categoria",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Data de criação"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Data de última atualização"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      "CreateCategoryDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Título da categoria",
+            "example": "Estudos",
+            "minLength": 2,
+            "maxLength": 60
+          },
+          "description": {
+            "type": "string",
+            "description": "Descrição da categoria",
+            "example": "Tarefas da faculdade",
+            "maxLength": 255
+          }
+        },
+        "required": [
+          "title"
+        ]
+      },
+      "UpdateCategoryDto": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Título da categoria",
+            "example": "Faculdade",
+            "minLength": 2,
+            "maxLength": 60
+          },
+          "description": {
+            "type": "string",
+            "description": "Descrição da categoria",
+            "maxLength": 255
           }
         }
       }
