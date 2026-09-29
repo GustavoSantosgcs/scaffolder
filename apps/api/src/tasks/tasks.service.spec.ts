@@ -82,6 +82,18 @@ describe('TasksService', () => {
     });
   });
 
+    it('rejects category that does not exist', async () => {
+      prisma.category = { findFirst: vi.fn().mockResolvedValue(null) };
+
+      await expect(
+        service.create(mockUser.id, {
+          title: 'Tarefa com categoria',
+          categoryId: 'categoria-inexistente',
+        }),
+      ).rejects.toThrow(BadRequestException);
+      expect(prisma.task.create).not.toHaveBeenCalled();
+    });  
+
   describe('findAll', () => {
     it('restricts query to own tasks for regular users', async () => {
       prisma.task.count.mockResolvedValue(1);

@@ -13,6 +13,11 @@ vi.mock('../context/auth-context', () => ({
 }));
 
 vi.mock('../lib/api-client', () => ({
+  categoriesControllerFindAll: vi.fn().mockResolvedValue({
+    data: [],
+    status: 200,
+    headers: new Headers(),
+  }),  
   tasksControllerFindAll: vi.fn().mockResolvedValue({
     data: {
       data: [
@@ -24,6 +29,8 @@ vi.mock('../lib/api-client', () => ({
           priority: 'HIGH',
           dueDate: '2026-12-31T00:00:00.000Z',
           ownerId: 'usr-1',
+          categoryId: 'cat-1',
+          category: { id: 'cat-1', title: 'Estudos' },
           createdAt: '2026-08-31T10:00:00.000Z',
           updatedAt: '2026-08-31T10:00:00.000Z',
         },
@@ -64,5 +71,6 @@ describe('TasksPage', () => {
     expect(screen.getByText('Definir pipeline no GitHub Actions')).toBeInTheDocument();
     expect(screen.getAllByText('Alta').length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText('Pendente').length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText('Estudos')).toBeInTheDocument();
   });
 });
