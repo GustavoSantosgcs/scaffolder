@@ -137,3 +137,26 @@ pnpm test           # Executa os testes do backend e frontend
 pnpm docs:check     # Valida a integridade dos guias, ADRs, rotas e modelos
 pnpm check:all      # Validação completa (testes + build + api:check + docs:check)
 ```
+## Atividade inicial: Categorias de Tarefas
+
+Funcionalidade adicionada sobre o módulo de referência de tarefas.
+
+**Banco de dados**
+- Nova entidade `Category` (id, título, descrição, soft delete), migration `20260926_categories_module`.
+- `Task` ganhou o campo opcional `categoryId` (uma categoria por tarefa). Ao excluir uma categoria, as tarefas ficam sem categoria.
+
+**API** (`apps/api/src/categories/`)
+- `GET /api/v1/categories` e `GET /api/v1/categories/:id`: qualquer usuário autenticado.
+- `POST`, `PUT /:id` e `DELETE /:id`: apenas ADMIN.
+- Regra de negócio: não há duas categorias ativas com o mesmo título (ignora maiúsculas e minúsculas).
+- Tarefas aceitam `categoryId` ao criar e editar, validam se a categoria existe e podem ser filtradas por `?categoryId=`.
+
+**Frontend**
+- Página **Categorias** (`/categories`), visível apenas para ADMIN, para criar, editar e excluir categorias.
+- Na página de Tarefas: seleção de categoria nos formulários, etiqueta da categoria nos cartões e filtro por categoria.
+
+**Testes**
+- `categories.service.spec.ts`: criação, título duplicado, categoria inexistente e exclusão com desvinculação.
+- Testes existentes de tarefas atualizados para cobrir a categoria.
+
+**Como testar:** faça login como `admin@appstart.local` / `ChangeMe123456!`, acesse **Categorias** no menu, crie algumas categorias e use-as na tela de **Tarefas**.
