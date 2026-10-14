@@ -148,11 +148,11 @@ export function CategoriesPage() {
       {/* Cabeçalho */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-            <Tag className="h-6 w-6 text-blue-600" />
+          <h1 className="text-2xl font-bold tracking-tight text-heading flex items-center gap-2">
+            <Tag className="h-6 w-6 text-brand-text" />
             Gerenciamento de Categorias
           </h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
+          <p className="text-sm text-muted">
             Categorias globais usadas para organizar as tarefas de todos os usuários.
           </p>
         </div>
@@ -191,21 +191,21 @@ export function CategoriesPage() {
         <Card className="overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-slate-50 dark:bg-slate-800/60 text-xs uppercase font-semibold text-slate-600 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
+              <thead className="bg-surface-muted text-xs uppercase font-semibold text-muted border-b border-line">
                 <tr>
                   <th className="py-3.5 px-4">Título</th>
                   <th className="py-3.5 px-4">Descrição</th>
                   <th className="py-3.5 px-4 text-right">Ações</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-800/80">
+              <tbody className="divide-y divide-line">
                 {categories.map((category) => (
-                  <tr key={category.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
-                    <td className="py-3.5 px-4 font-medium text-slate-900 dark:text-slate-100">
+                  <tr key={category.id} className="hover:bg-surface-muted/50 transition-colors">
+                    <td className="py-3.5 px-4 font-medium text-heading">
                       {category.title}
                     </td>
-                    <td className="py-3.5 px-4 text-slate-600 dark:text-slate-300">
-                      {category.description || <span className="text-slate-400">—</span>}
+                    <td className="py-3.5 px-4 text-body">
+                      {category.description || <span className="text-muted">—</span>}
                     </td>
                     <td className="py-3.5 px-4">
                       <div className="flex items-center justify-end gap-2">
@@ -225,7 +225,7 @@ export function CategoriesPage() {
                           isLoading={deleteMutation.isPending && deleteMutation.variables === category.id}
                           onClick={() => handleDelete(category)}
                         >
-                          <Trash2 className="h-3.5 w-3.5 text-red-500" />
+                          <Trash2 className="h-3.5 w-3.5 text-danger-text" />
                           Excluir
                         </Button>
                       </div>
@@ -235,7 +235,7 @@ export function CategoriesPage() {
               </tbody>
             </table>
           </div>
-          <div className="p-4 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-500">
+          <div className="p-4 border-t border-line text-xs text-muted">
             Total de <strong>{categories.length}</strong> categorias
           </div>
         </Card>
@@ -244,15 +244,15 @@ export function CategoriesPage() {
       {/* Modal de criar/editar */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs">
-          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl max-w-md w-full p-6 relative">
+          <div className="bg-surface rounded-2xl border border-line shadow-xl max-w-md w-full p-6 relative">
             <button
               onClick={closeModal}
-              className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+              className="absolute top-4 right-4 text-muted hover:text-body"
             >
               <X className="h-5 w-5" />
             </button>
 
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
+            <h3 className="text-lg font-bold text-heading mb-4">
               {editingCategory ? 'Editar Categoria' : 'Nova Categoria'}
             </h3>
 
@@ -271,7 +271,7 @@ export function CategoriesPage() {
                 error={errors.description?.message}
               />
 
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-line">
                 <Button type="button" variant="outline" size="sm" onClick={closeModal}>
                   Cancelar
                 </Button>
